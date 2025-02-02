@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROSTCHANGER</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>LevelUp Shop</h1>
+        <nav>
+            <a href="index.html">OTT</a>
+            <a href="faqs.html">Games</a>
+            <a href="#">Other</a>
+            <a href="#">Contact</a>
+            <button class="login-btn" onclick="login()">Login</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="product">
+            <img src="assets/gta5.jpg" alt="GTA 5 Online Account">
+            <h2>GTA 5 Online Account</h2>
+            <p>500 INR</p>
+            <button onclick="addToCart('GTA 5 Online Account', 500)">PURCHASE</button>
+        </section>
+
+        <section class="product">
+            <img src="assets/palworld.jpg" alt="Palworld Account">
+            <h2>Palworld Account</h2>
+            <p>300 INR</p>
+            <button onclick="addToCart('Palworld Account', 300)">PURCHASE</button>
+        </section>
+
+        <section class="product">
+            <img src="assets/minecraft_full.jpg" alt="Minecraft Full Access">
+            <h2>Minecraft Full Access</h2>
+            <p>900 INR</p>
+            <button onclick="addToCart('Minecraft Full Access', 900)">PURCHASE</button>
+        </section>
+
+        <section class="product">
+            <img src="assets/minecraft_semi.jpg" alt="Minecraft Semi Access">
+            <h2>Minecraft Semi Access</h2>
+            <p>150 INR</p>
+            <button onclick="addToCart('Minecraft Semi Access', 150)">PURCHASE</button>
+        </section>
+    </main>
+
+    <aside class="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: <span id="cart-total">0</span> INR</p>
+        <button onclick="proceedToCheckout()">Checkout</button>
+    </aside>
+
+    <script>
+        let cart = [];
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartList = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            cartList.innerHTML = '';
+            let total = 0;
+            cart.forEach(product => {
+                const li = document.createElement('li');
+                li.textContent = `${product.item} - ${product.price} INR`;
+                cartList.appendChild(li);
+                total += product.price;
+            });
+            cartTotal.textContent = total;
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            localStorage.setItem("cart", JSON.stringify(cart));
+            window.location.href = "checkout.html";
+        }
+    </script>
+</body>
+</html>

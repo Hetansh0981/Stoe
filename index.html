@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROSTCHANGER</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>LevelUp Shop</h1>
+        <nav>
+            <a href="index.html">OTT</a>
+            <a href="faqs.html">Games</a>
+            <a href="#">Other</a>
+            <a href="#">Contact</a>
+            <button class="login-btn" onclick="login()">Login</button>
+            
+            </div>
+        </nav>
+       
+    </header>
+
+    <main>
+        <section class="product">
+            <img src="assets/11.jpg" alt="CrunchyRoll+">
+            <h2>CrunchyRoll+</h2>
+            <p>1 Year Mega Plan at
+                     450 INR
+            </p>
+            <button onclick="addToCart('CrunchyRoll+', 450)">PURCHASE</button>
+        </section>
+
+        <section class="product">
+            <img src="assets/cc.png" alt="CrunchyRoll_Gold">
+            <h2>CrunchyRoll Gold</h2>
+            <p>3 Months Account of CrunchyRoll AT</p>
+            <p>250 INR</p>
+            <button onclick="addToCart('CrunchyRoll_Gold', 250)">PURCHASE</button>
+        </section>
+
+        <section class="product">
+            <img src="assets/lol.jpg" alt="CrunchyRoll_PRE">
+            <h2>CrunchyRoll Universal</h2>
+            <p>1 Month of Crunchyroll At</p>
+            <p>150 INR</p>
+            <button onclick="addToCart('CrunchyRoll Universal', 150)">PURCHASE</button>
+        </section>
+
+        <section class="product">
+            <img src="assets/nn.jpg" alt="Netflix+">
+            <h2>Netflix+</h2>
+            <p>1 Year Account Of Netflix @</p>
+            <p>800 INR</p>
+            <button onclick="addToCart('Netflix+', 800)">PURCHASE</button>
+        </section>
+
+        <section class="product">
+            <img src="valorant.jpg" alt="Netflix_Gold">
+            <h2>NetFlix Gold</h2>
+            <p>3 Months Account of Netflix At</p>
+            <p>379 INR</p>
+            <button onclick="addToCart('Netflix Gold', 379)">PURCHASE</button>
+        </section>
+        <section class="product">
+            <img src="assets/11.jpg" alt="Netflix_PRE">
+            <h2>Netflix Universal</h2>
+            <p>1 Month Netflix Account At</p>
+            <p>99 INR</p>
+            <button onclick="addToCart('Netflix Universal', 99)">PURCHASE</button>
+        </section>
+        <section class="product">
+            <img src="assets/11.jpg" alt="Amazon_Prime">
+            <h2>Amazon Prime+</h2>
+            <p>Coming Soon!</p>
+            <button onclick="addToCart('not available', 0)">PURCHASE</button>
+        </section>
+   
+
+        
+    </main>
+    <aside class="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: <span id="cart-total">0</span> INR</p>
+        <button onclick="proceedToCheckout()" class="buy-btn">Checkout</button>
+    </aside>
+
+    <script>
+        let cart = [];
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartList = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            cartList.innerHTML = '';
+            let total = 0;
+            cart.forEach(product => {
+                const li = document.createElement('li');
+                li.textContent = `${product.item} - ${product.price} INR`;
+                cartList.appendChild(li);
+                total += product.price;
+            });
+            cartTotal.textContent = total;
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            localStorage.setItem("cart", JSON.stringify(cart));
+            window.location.href = "checkout.html";
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
